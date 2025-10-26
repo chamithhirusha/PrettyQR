@@ -3,9 +3,17 @@
 import { useState, useEffect } from "react";
 import QRCode from "qrcode";
 import DarkVeil from "./components/DarkVeil";
-import { DownloadIcon, QRIcon, ReloadIcon } from "./components/Icons";
+import {
+  DownloadIcon,
+  QRIcon,
+  ReloadIcon,
+  HeartIcon,
+} from "./components/Icons";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+
   const defaultFgColor = "#ffffff";
   const defaultBgColor = "#000000";
   const defaultSize = 256;
@@ -100,6 +108,7 @@ export default function Home() {
 
   return (
     <div style={{ width: "100%", height: "100vh", position: "relative" }}>
+      {/* Background DarkVeil */}
       <div
         style={{
           position: "absolute",
@@ -112,6 +121,14 @@ export default function Home() {
         }}
       >
         <DarkVeil />
+      </div>
+
+      {/* Floating Heart Icon */}
+      <div
+        className="fixed bottom-3 right-3 p-2 rounded-full bg-white/10 backdrop-blur-3xl border border-white/20 flex items-center justify-center shadow-lg hover:shadow-2xl transition-all cursor-pointer z-20"
+        onClick={() => router.push("https://github.com/chamithhirusha")}
+      >
+        <HeartIcon className="w-4 h-4 text-white/70" />
       </div>
 
       {/* Foreground content */}
@@ -129,8 +146,8 @@ export default function Home() {
             <textarea
               rows={4}
               maxLength={maxCharLength}
-              className="w-full p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20
-            focus:ring-2 focus:ring-white/50 focus:border-white/40 outline-none placeholder-white/50 text-white transition max-h-[350px] min-h-[100px]"
+              className="w-full font-geist-mono p-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20
+              focus:ring-2 focus:ring-white/50 focus:border-white/40 outline-none placeholder-white/50 text-white transition max-h-[350px] min-h-[100px]"
               placeholder="Enter text or URL to encode..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -198,8 +215,8 @@ export default function Home() {
                   checked={withBackground}
                   onChange={() => setWithBackground(!withBackground)}
                   className="w-5 h-5 rounded-md accent-white cursor-pointer
-               bg-white/10 backdrop-blur-sm border border-white/30 shadow-md
-               transition-all hover:bg-white/20"
+                  bg-white/10 backdrop-blur-sm border border-white/30 shadow-md
+                  transition-all hover:bg-white/20"
                 />
                 <label
                   htmlFor="withBackground"
@@ -224,7 +241,7 @@ export default function Home() {
                 <button
                   onClick={() => downloadQRCode("png")}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20
-                hover:bg-white/20 transition font-medium text-white cursor-pointer shadow-md"
+                  hover:bg-white/20 transition font-medium text-white cursor-pointer shadow-md"
                 >
                   <DownloadIcon /> PNG
                 </button>
@@ -232,7 +249,7 @@ export default function Home() {
                 <button
                   onClick={() => downloadQRCode("svg")}
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20
-                hover:bg-white/20 transition font-medium text-white cursor-pointer shadow-md"
+                  hover:bg-white/20 transition font-medium text-white cursor-pointer shadow-md"
                 >
                   <DownloadIcon /> SVG
                 </button>
@@ -240,7 +257,7 @@ export default function Home() {
               <button
                 onClick={resetAll}
                 className="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-red-600/20 backdrop-blur-sm border border-red-500/30
-              hover:bg-red-600/40 transition font-medium text-white cursor-pointer shadow-md"
+                hover:bg-red-600/40 transition font-medium text-white cursor-pointer shadow-md"
               >
                 <ReloadIcon /> Reset
               </button>

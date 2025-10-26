@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 const engagement = Engagement({
-  variable: "--font-special",
+  variable: "--font-engagement",
   subsets: ["latin"],
   weight: "400",
 });
